@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "896418149530",
+    "project_id": "ecmaencuesta",
+    "storage_bucket": "ecmaencuesta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896418149530:android:d0bfef8eef17c6e40d1b23",
+        "android_client_info": {
+          "package_name": "com.devel.acme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896418149530-947qdr04vnludg127dpj08tai2vct9kd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmnoH-xYFHVtoZWHZrEHB_jnN09f8_h_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896418149530-947qdr04vnludg127dpj08tai2vct9kd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
