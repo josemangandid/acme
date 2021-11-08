@@ -12,6 +12,7 @@ String encuestaToJson(List<Encuesta> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Encuesta {
+
   Encuesta({
     this.key,
     @required this.name,

@@ -2,6 +2,7 @@ import 'package:acme/app/core/values/colors.dart';
 import 'package:acme/app/data/models/encuesta_model.dart';
 import 'package:acme/app/glogal_widgets/glogal_controller.dart';
 import 'package:acme/app/glogal_widgets/real_time_database.dart';
+import 'package:acme/app/glogal_widgets/shared_preferences.dart';
 import 'package:acme/app/modules/home/home_controller.dart';
 import 'package:acme/app/routes/routes.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -14,7 +15,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = Get.find<GC>();
-    //print(c2.getEncuestas());
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) => Scaffold(
@@ -36,6 +36,13 @@ class Home extends StatelessWidget {
                   c.signOut();
                 },
               ),
+              ListTile(
+                title: const Text('crear'),
+                onTap: () {
+                  c.createDynamicLink(
+                      'VCSXrejvkBXuSfDbUhriCGrDPo72', '-Mnl4VeJrClFQAXrdE84');
+                },
+              ),
             ],
           ),
         ),
@@ -44,7 +51,7 @@ class Home extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
+          child: ListView(
             children: [_getEncuestasList()],
           ),
         ),
@@ -69,10 +76,12 @@ class Home extends StatelessWidget {
   }
 
   Widget _getEncuestasList() {
-    print('Inicializado');
+    final c = Get.find<GC>();
     final c2 = Get.find<DatabaseService>();
+    final p = PrefsUser();
     return Expanded(
       child: FirebaseAnimatedList(
+        shrinkWrap: true,
         query: c2.getEncuestas(),
         itemBuilder: (context, snapshot, animation, index) {
           final json = snapshot.value as Map<dynamic, dynamic>;
@@ -82,7 +91,9 @@ class Home extends StatelessWidget {
             child: Card(
               color: MyColors.tarjetas,
               child: ListTile(
-                onTap: () async {},
+                onTap: () {
+                  Get.toNamed(Routes.respuestas,     arguments: {"key": snapshot.key, "title": encuesta.name});
+                },
                 subtitle: Text(encuesta.discription!),
                 title: Row(
                   children: [
@@ -93,6 +104,15 @@ class Home extends StatelessWidget {
                           color: MyColors.textoClaro!),
                     ),
                     const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        c.createDynamicLink(p.userid, snapshot.key!);
+                      },
+                      icon: const Icon(
+                        Icons.share,
+                        color: Colors.grey,
+                      ),
+                    ),
                     IconButton(
                       onPressed: () {
                         Encuesta e = Encuesta(

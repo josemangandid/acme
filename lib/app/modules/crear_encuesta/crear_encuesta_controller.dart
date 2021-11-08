@@ -315,7 +315,7 @@ class CrearEncuestaController extends GetxController {
 
   void agregarCampo() async {
     type = dropDownValue.value;
-    if (type == 'Text') {
+    if (type == 'Texto') {
       type = 'text';
     } else if (type == 'Numérico') {
       type = 'number';
@@ -334,7 +334,7 @@ class CrearEncuestaController extends GetxController {
   void editCampo(int i) {
     type = dropDownValue.value;
     switch (type) {
-      case 'Text':
+      case 'Texto':
         type = 'text';
         break;
       case 'Numérico':

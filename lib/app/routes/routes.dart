@@ -6,4 +6,6 @@ class Routes {
   static const  forgot = '/forgot';
   static const  crearencuesta = '/crearencuesta';
   static const  editarencuesta = '/editarencuesta';
+  static const  contestarencuesta = '/contestarencuesta';
+  static const  respuestas = '/respuestas';
 }

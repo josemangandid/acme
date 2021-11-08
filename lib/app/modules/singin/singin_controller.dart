@@ -13,14 +13,13 @@ class SignInController extends GetxController {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _encuesta = TextEditingController();
   final c = Get.find<GC>();
-  GlobalKey get formKey => _formKey;
-  GlobalKey get encuestaFormKey => _encuestaFormKey;
+  GlobalKey<FormState> get formKey => _formKey;
+  GlobalKey<FormState> get encuestaFormKey => _encuestaFormKey;
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   TextEditingController get encuesta => _encuesta;
 
   final p = PrefsUser();
-
 
   signin(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -48,7 +47,7 @@ class SignInController extends GetxController {
     Get.offNamed(route);
   }
 
-   final RxBool _isObscure = true.obs;
+  final RxBool _isObscure = true.obs;
   bool get isObscure => _isObscure.value;
 
   setObscure() {
@@ -72,7 +71,8 @@ class SignInController extends GetxController {
             onPressed: () {
               Navigator.pop(_);
             },
-            child: const Text('Cancelar', style: TextStyle(color: Color(0xff303030))),
+            child: const Text('Cancelar',
+                style: TextStyle(color: Color(0xff303030))),
           ),
           TextButton(
             style: ButtonStyle(
@@ -82,7 +82,8 @@ class SignInController extends GetxController {
             onPressed: () {
               Navigator.pop(_, 'fun');
             },
-            child: const Text('¿Reintentar?', style: TextStyle(color: Color(0xff303030))),
+            child: const Text('¿Reintentar?',
+                style: TextStyle(color: Color(0xff303030))),
           ),
         ],
       ),
@@ -90,6 +91,13 @@ class SignInController extends GetxController {
       case 'fun':
         signin(_);
         break;
+    }
+  }
+
+  ressponderEncuesta() {
+    if (_encuestaFormKey.currentState!.validate()) {
+      c.withLink(_encuesta.text);
+      print('data');
     }
   }
 }

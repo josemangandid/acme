@@ -2,6 +2,8 @@ import 'package:acme/app/modules/crear_encuesta/crear_encuesta.dart';
 import 'package:acme/app/modules/editar_encuesta/editar_encuesta.dart';
 import 'package:acme/app/modules/forgot/forgot.dart';
 import 'package:acme/app/modules/home/home.dart';
+import 'package:acme/app/modules/responder_encuesta/responder_encuesta.dart';
+import 'package:acme/app/modules/respuestas/respuestas.dart';
 import 'package:acme/app/modules/singin/singin.dart';
 import 'package:acme/app/modules/singup/singup.dart';
 import 'package:acme/app/modules/splash_screen/splash_screen.dart';
@@ -17,5 +19,7 @@ class AppPages {
     GetPage(name: Routes.forgot, page: () => const Forgot()),
     GetPage(name: Routes.crearencuesta, page: () => const CrearEncuesta()),
     GetPage(name: Routes.editarencuesta, page: () => const EditarEncuesta()),
+    GetPage(name: Routes.contestarencuesta, page: () => const ResponderEncuesta()),
+    GetPage(name: Routes.respuestas, page: () => const RespuestasPage()),
   ];
 }

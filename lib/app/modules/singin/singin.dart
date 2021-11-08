@@ -158,31 +158,31 @@ class SignIn extends StatelessWidget {
                               key: _.encuestaFormKey,
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: Obx(
-                                  () => TextFormField(
-                                    autofocus: false,
-                                    obscureText: _.isObscure,
-                                    controller: _.encuesta,
-                                    enableSuggestions: false,
-                                    autocorrect: false,
-                                    keyboardType: TextInputType.text,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Encuesta',
-                                    ),
-                                    validator: (String? value) {
-                                      if (value!.isEmpty) {
-                                        return 'No dejar este campo vacío';
-                                      }
-                                      return null;
-                                    },
+                                child: TextFormField(
+                                  autofocus: false,
+                                  controller: _.encuesta,
+                                  enableSuggestions: false,
+                                  autocorrect: false,
+                                  keyboardType: TextInputType.url,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Encuesta',
                                   ),
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return 'No dejar este campo vacío';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                             ),
                           ),
                           IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.arrow_forward_ios, color: MyColors.verde))
+                              onPressed: () {
+                                _.ressponderEncuesta();
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios,
+                                  color: MyColors.verde))
                         ],
                       )
                     ],

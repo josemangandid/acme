@@ -97,13 +97,20 @@ class CrearEncuesta extends StatelessWidget {
                           onTap: () async {},
                           title: Row(
                             children: [
-                              Text(
-                                _.campos[i].title!,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: MyColors.textoClaro!),
+                              Expanded(
+                                child: Text(
+                                  _.campos[i].title!,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: MyColors.textoClaro!),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                              const Spacer(),
+                            ],
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
                               IconButton(
                                 onPressed: () {
                                   _.edit(context, i);

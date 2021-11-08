@@ -94,37 +94,43 @@ class EditarEncuesta extends StatelessWidget {
                       child: Card(
                         color: MyColors.tarjetas,
                         child: ListTile(
-                          onTap: () async {},
-                          title: Row(
-                            children: [
-                              Text(
-                                _.campos[i].title!,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: MyColors.textoClaro!),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  _.edit(context, i);
-                                },
-                                icon: const Icon(
-                                  Icons.create,
-                                  color: Colors.grey,
+                            onTap: () async {},
+                            title: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    _.campos[i].title!,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyColors.textoClaro!,),
+                                  overflow: TextOverflow.ellipsis,
+                                  ),
+                                )
+                              ],
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    _.edit(context, i);
+                                  },
+                                  icon: const Icon(
+                                    Icons.create,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  _.deleteCampo(i);
-                                },
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.grey,
+                                IconButton(
+                                  onPressed: () {
+                                    _.deleteCampo(i);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
+                              ],
+                            )),
                       ),
                     );
                   },

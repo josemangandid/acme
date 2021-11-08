@@ -8,7 +8,7 @@ class ForgotController extends GetxController {
   final _formKey = GlobalKey<FormState>();
 
 final   TextEditingController? _email = TextEditingController();
-  GlobalKey get formKey => _formKey;
+  GlobalKey<FormState> get formKey => _formKey;
   TextEditingController get emailController => _email!;
 
   reset(BuildContext context) async {

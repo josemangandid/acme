@@ -1,5 +1,4 @@
 import 'package:acme/app/core/values/colors.dart';
-import 'package:acme/app/data/provider/provider.dart';
 import 'package:acme/app/glogal_widgets/glogal_controller.dart';
 import 'package:acme/app/glogal_widgets/shared_preferences.dart';
 import 'package:acme/app/routes/routes.dart';
@@ -13,7 +12,7 @@ class SignUpController extends GetxController {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final c = Get.find<GC>();
-  GlobalKey get formKey => _formKey;
+  GlobalKey<FormState> get formKey => _formKey;
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
 
@@ -37,10 +36,8 @@ class SignUpController extends GetxController {
   }
 
   final prefs = PrefsUser();
-  final provider = Provider();
 
   Future<void> _register(BuildContext context) async {
-    print('Se ha intentado crear usuario');
     final User? user = (await _auth.createUserWithEmailAndPassword(
       email: _emailController.text.replaceAll(' ', ''),
       password: _passwordController.text,
@@ -49,13 +46,10 @@ class SignUpController extends GetxController {
     if (user != null) {
       prefs.userid = user.uid;
       prefs.authValue = true;
-      print('usuario creado con exito');
       _success.value = true;
       _userEmail.value = user.email!;
-      provider.createuser();
       Get.offNamed(Routes.home);
     } else {
-      print('no se ha creado el usuario');
       _success.value = false;
       showD(context);
     }

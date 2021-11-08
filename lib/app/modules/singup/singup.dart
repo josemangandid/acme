@@ -2,7 +2,6 @@ import 'package:acme/app/behavior/hiden_scroll_behavior.dart';
 import 'package:acme/app/core/values/colors.dart';
 import 'package:acme/app/modules/singup/singup_controller.dart';
 import 'package:acme/app/routes/routes.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

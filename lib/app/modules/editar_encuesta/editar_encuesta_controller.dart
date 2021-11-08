@@ -370,8 +370,6 @@ class EditarEncuestaController extends GetxController {
 
   editarEncuesta(BuildContext context) {
     if (_formKeyEncuesta.currentState!.validate() && campos.isNotEmpty) {
-      print(encuesta!.key);
-
       Encuesta? encuestaa = Encuesta(
         key: encuesta!.key,
         name: _name.text,
