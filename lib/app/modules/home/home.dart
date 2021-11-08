@@ -36,13 +36,6 @@ class Home extends StatelessWidget {
                   c.signOut();
                 },
               ),
-              ListTile(
-                title: const Text('crear'),
-                onTap: () {
-                  c.createDynamicLink(
-                      'VCSXrejvkBXuSfDbUhriCGrDPo72', '-Mnl4VeJrClFQAXrdE84');
-                },
-              ),
             ],
           ),
         ),
@@ -79,70 +72,68 @@ class Home extends StatelessWidget {
     final c = Get.find<GC>();
     final c2 = Get.find<DatabaseService>();
     final p = PrefsUser();
-    return Expanded(
-      child: FirebaseAnimatedList(
-        shrinkWrap: true,
-        query: c2.getEncuestas(),
-        itemBuilder: (context, snapshot, animation, index) {
-          final json = snapshot.value as Map<dynamic, dynamic>;
-          final encuesta = Encuesta.fromJson(json);
-          return Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-            child: Card(
-              color: MyColors.tarjetas,
-              child: ListTile(
-                onTap: () {
-                  Get.toNamed(Routes.respuestas,     arguments: {"key": snapshot.key, "title": encuesta.name});
-                },
-                subtitle: Text(encuesta.discription!),
-                title: Row(
-                  children: [
-                    Text(
-                      encuesta.name!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: MyColors.textoClaro!),
+    return FirebaseAnimatedList(
+      shrinkWrap: true,
+      query: c2.getEncuestas(),
+      itemBuilder: (context, snapshot, animation, index) {
+        final json = snapshot.value as Map<dynamic, dynamic>;
+        final encuesta = Encuesta.fromJson(json);
+        return Padding(
+          padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+          child: Card(
+            color: MyColors.tarjetas,
+            child: ListTile(
+              onTap: () {
+                Get.toNamed(Routes.respuestas,     arguments: {"key": snapshot.key, "title": encuesta.name});
+              },
+              subtitle: Text(encuesta.discription!),
+              title: Row(
+                children: [
+                  Text(
+                    encuesta.name!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: MyColors.textoClaro!),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      c.createDynamicLink(p.userid, snapshot.key!);
+                    },
+                    icon: const Icon(
+                      Icons.share,
+                      color: Colors.grey,
                     ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        c.createDynamicLink(p.userid, snapshot.key!);
-                      },
-                      icon: const Icon(
-                        Icons.share,
-                        color: Colors.grey,
-                      ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Encuesta e = Encuesta(
+                          key: snapshot.key,
+                          campos: encuesta.campos,
+                          discription: encuesta.discription,
+                          name: encuesta.name);
+                      Get.toNamed(Routes.editarencuesta, arguments: e);
+                    },
+                    icon: const Icon(
+                      Icons.create,
+                      color: Colors.grey,
                     ),
-                    IconButton(
-                      onPressed: () {
-                        Encuesta e = Encuesta(
-                            key: snapshot.key,
-                            campos: encuesta.campos,
-                            discription: encuesta.discription,
-                            name: encuesta.name);
-                        Get.toNamed(Routes.editarencuesta, arguments: e);
-                      },
-                      icon: const Icon(
-                        Icons.create,
-                        color: Colors.grey,
-                      ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      c2.eliminarEncuesta(snapshot.key!);
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.grey,
                     ),
-                    IconButton(
-                      onPressed: () {
-                        c2.eliminarEncuesta(snapshot.key!);
-                      },
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

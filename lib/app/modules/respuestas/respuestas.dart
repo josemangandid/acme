@@ -20,11 +20,7 @@ class RespuestasPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: ListView(
-            children: [
-              _getEncuestasList(_.args["key"]),
-            ],
-          ),
+          child: _getEncuestasList(_.args["key"]),
         ),
       ),
     );
@@ -34,42 +30,40 @@ class RespuestasPage extends StatelessWidget {
     //final c = Get.find<GC>();
     final c2 = Get.find<DatabaseService>();
     //final p = PrefsUser();
-    return Expanded(
-      child: FirebaseAnimatedList(
-        shrinkWrap: true,
-        query: c2.getRespuesta(id),
-        itemBuilder: (context, snapshot, animation, index) {
-          final listjson = snapshot.value as List;
-          final List<CampoDb>? campos = listjson.map((e) {
-            return CampoDb(title: e["title"], campo: e["campo"]);
-          }).toList();
-          final i = index + 1;
-          return Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-            child: Card(
-              color: MyColors.tarjetas,
-              child: ExpansionTile(
-                title: Text(
-                  'Respuesta $i',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: MyColors.textoClaro!),
-                ),
-                children: List.generate(
-                  campos!.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ListTile(
-                      title: Text(campos[index].title! +
-                          " : " +
-                          campos[index].campo.toString()),
-                    ),
+    return FirebaseAnimatedList(
+      shrinkWrap: true,
+      query: c2.getRespuesta(id),
+      itemBuilder: (context, snapshot, animation, index) {
+        final listjson = snapshot.value as List;
+        final List<CampoDb>? campos = listjson.map((e) {
+          return CampoDb(title: e["title"], campo: e["campo"]);
+        }).toList();
+        final i = index + 1;
+        return Padding(
+          padding: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+          child: Card(
+            color: MyColors.tarjetas,
+            child: ExpansionTile(
+              title: Text(
+                'Respuesta $i',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: MyColors.textoClaro!),
+              ),
+              children: List.generate(
+                campos!.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListTile(
+                    title: Text(campos[index].title! +
+                        " : " +
+                        campos[index].campo.toString()),
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
