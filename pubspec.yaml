@@ -40,7 +40,7 @@ flutter_icons:
 
 flutter:
   assets:
-    - asetts/img/
+    - assets/img/
 
   uses-material-design: true
 

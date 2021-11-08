@@ -97,7 +97,6 @@ class SignInController extends GetxController {
   ressponderEncuesta() {
     if (_encuestaFormKey.currentState!.validate()) {
       c.withLink(_encuesta.text);
-      print('data');
     }
   }
 }
